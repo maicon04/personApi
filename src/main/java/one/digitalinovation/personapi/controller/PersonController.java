@@ -10,6 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class PersonController {
     @GetMapping
     public String getBook(){
-        return "Api Test!";
+        return "Testando funcionamento no HeroKu!";
     }
 }
