@@ -18,17 +18,20 @@ import java.util.List;
 public class PersonDTO {
 
     private Long id;
-
+    
+    @Valid
     @NotEmpty
     @Size(min = 2, max = 100)
     private String firstName;
 
+    @Valid
     @NotEmpty
     @Size(min = 2, max = 100)
     private String lastName;
 
+    @Valid
     @NotEmpty
-    @CPF
+    @CPF(message="CPF inválido")
     private String cpf;
 
     private String birthDate;
