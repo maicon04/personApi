@@ -3,6 +3,7 @@ package one.digitalinovation.personapi.service;
 import one.digitalinovation.personapi.dto.request.PersonDTO;
 import one.digitalinovation.personapi.dto.response.MessageResponseDTO;
 import one.digitalinovation.personapi.entity.Person;
+import one.digitalinovation.personapi.exception.PersonNotFoundExcpetion;
 import one.digitalinovation.personapi.mapper.PersonMapper;
 import one.digitalinovation.personapi.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,11 @@ public class PersonService {
     @Autowired
     public PersonService(PersonRepository personRepository) {
         this.personRepository = personRepository;
+    }
+
+    public void delete(Long id) throws PersonNotFoundExcpetion {
+        verifyIfExists(id);
+        personRepository.deleteById(id);
     }
 
     public MessageResponseDTO createPerson(PersonDTO personDTO){
@@ -40,4 +46,15 @@ public class PersonService {
                 .map(personMapper::toDTO)
                 .collect(Collectors.toList());
     }
+
+    public PersonDTO findById(Long id) throws PersonNotFoundExcpetion{
+        Person person = verifyIfExists(id);
+      return personMapper.toDTO(person);
+    }
+
+    private Person verifyIfExists(Long id) throws PersonNotFoundExcpetion {
+        return personRepository.findById(id)
+                .orElseThrow(() -> new PersonNotFoundExcpetion(id));
+    }
+
 }
