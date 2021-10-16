@@ -1,6 +1,6 @@
 package one.digitalinovation.personapi.controller;
 
-import one.digitalinovation.personapi.dto.MessageResponseDTO;
+import one.digitalinovation.personapi.dto.response.MessageResponseDTO;
 import one.digitalinovation.personapi.entity.Person;
 import one.digitalinovation.personapi.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
